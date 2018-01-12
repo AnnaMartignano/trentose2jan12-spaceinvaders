@@ -67,6 +67,20 @@ router.route('/astronauts/:astronautID')
             }
         });
 
+    })
+    .get(function(req,res) {
+        console.log("GET person " + req.params.astronautID);
+
+        Astronaut.findById(req.params.astronautID, function (err, astro) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.header("Content-type","application/json");
+                res.send(JSON.stringify(astro));
+            }
+
+        });
+
     });
 
 // middleware route to support CORS and preflighted requests
