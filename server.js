@@ -33,6 +33,23 @@ mongoose.connect('mongodb://astro:astro@ds251747.mlab.com:51747/astronauts', opt
     err => { console.error(`Error while connecting to DB: ${err.message}`); }
 );
 
+router.route('/astronauts')
+     // this code will be activated if a POST request arrive on  “/api/astronauts
+
+    // get all the persons with GET
+    .get(function (req, res) {
+        console.log("Simple get of astronauts");
+
+        // find all
+        Astronaut.find(function(err,astronauts) {
+            if(err) {
+                res.send(err)
+            } else {
+                res.header("Content-type","application/json");
+                res.send(JSON.stringify(astronauts,null,4));
+            }
+
+        })
 router.route('/astronauts/:astronautID')
      // this code will be activated if a POST request arrive on  “/api/astronauts
 
